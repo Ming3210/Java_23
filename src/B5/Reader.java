@@ -9,7 +9,16 @@ class Reader extends Thread {
 
     @Override
     public synchronized void run() {
-        System.out.println("Read message: " + this.sharedData.getMessage());
-        notify();
+        while(true) {
+            synchronized(sharedData) {
+                try {
+                    System.out.println("Read message: " + sharedData.getMessage());
+                    sharedData.wait();
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            }
+        }
     }
 }

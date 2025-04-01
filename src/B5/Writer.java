@@ -8,8 +8,17 @@ class Writer extends Thread {
     }
 
     @Override
-    public synchronized void run() {
-        this.sharedData.setMessage(sharedData.getMessage());
-        notify();
+    public void run() {
+        for(int i = 1; i < 5; i++) {
+            synchronized(sharedData) {
+                sharedData.setMessage(sharedData.getMessage());
+                sharedData.notify();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
