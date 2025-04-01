@@ -3,7 +3,7 @@ package B5;
 class SharedResource {
     private String message;
     private boolean hasMessage = false;
-    private String[] messages; // Thêm mảng messages
+    private String[] messages;
 
     public SharedResource(String[] messages) {
         this.messages = messages;

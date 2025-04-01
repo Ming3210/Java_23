@@ -13,11 +13,13 @@ class Writer extends Thread {
         for (String msg : messages) {
             sharedResource.setMessage(msg);
             System.out.println("Writer gửi: " + msg);
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
+
         }
     }
 }
